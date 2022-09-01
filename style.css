@@ -1,0 +1,217 @@
+/*---------------------- DEFAULT ----------------------*/
+*
+{
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body
+{
+    width: 100vw;
+    height: 100vh;
+
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+/*-----------------------------------------------------*/
+
+
+
+/*------------------- Area of game --------------------*/
+
+.game-area
+{
+    width: 100%;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+/*-----------------------------------------------------*/
+
+
+
+/*--------------------- Title game --------------------*/
+
+.title-game
+{    
+    text-align: center;
+    margin-top: 45px;
+    margin-bottom: 100px;
+
+    font-size: 30px;
+    color: #5D5D5D;
+}
+/*-----------------------------------------------------*/
+
+
+
+/*----------------- Letters buttons -------------------*/
+
+.BTNs-CHARs
+{
+    width: 100%;
+    max-width: 750px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+}
+
+
+.BTNs-CHARs > input[type="button"]
+{
+    width: 40px;
+    height: 40px;
+    background-color: #EBEBEB;
+    border: none;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 3px;
+}
+
+
+.BTNs-CHARs > input[type="button"]:hover
+{
+    background-color: #A2A2A2;
+}
+
+
+/* when char button is desactived */
+.desactived
+{
+    background-color: #747474 !important;
+}
+/*-----------------------------------------------------*/
+
+
+
+
+/*------------------- Word's Categorie -----------------*/
+
+.categorie-title
+{
+    font-size: 23px;
+    margin-top: 40px;
+}
+/*-----------------------------------------------------*/
+
+
+
+
+/*----------- White sapces from the word --------------*/
+
+.ltt
+{
+    display: inline-block;
+    width: 30px;
+    height: 40px;
+    border-bottom: 2px solid #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+}
+/*-----------------------------------------------------*/
+
+
+
+
+/*--------------------- The word ----------------------*/
+
+.word
+{
+    display: flex;
+    margin-top: 30px;
+    gap: 5px;
+}
+/*-----------------------------------------------------*/
+
+
+
+
+/*------------------ Message container ----------------*/
+
+.MSG-container
+{
+    margin-top: 23px;
+}
+/*-----------------------------------------------------*/
+
+
+
+
+/*-------- characters that the user did not fill ------*/
+
+.missingLT
+{
+    color: #FF3636;
+}
+/*-----------------------------------------------------*/
+
+
+
+
+/*------- letter/characteres if the user wins ---------*/
+
+.win
+{
+    color: #52C654;
+}
+/*-----------------------------------------------------*/
+
+
+
+
+/*------------------- Restarr button -------------------*/
+
+.restartBTN
+{
+    width: 290px;
+    height: 40px;
+
+    margin-top: 40px;
+    border-radius: 5px;
+
+    background-color: #171717;
+    color: #fff;
+    border: none;
+    margin-bottom: 30px;
+}
+/*-------------------------------------------------------*/
+
+
+
+
+/*-------------- footer and your elements ---------------*/
+
+footer
+{
+    margin-top: 30px;
+    padding: 5px 30px;
+    gap: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.links
+{
+    width: 40px;
+    height: 40px;
+}
+
+
+.version-app
+{
+    color: #A2A2A2;
+}
+/*-------------------------------------------------------*/
