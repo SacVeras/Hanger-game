@@ -108,17 +108,21 @@ body
 
 /*----------- White sapces from the word --------------*/
 
-.ltt
+.ltt, .nlt
 {
     display: inline-block;
     width: 30px;
     height: 40px;
-    border-bottom: 2px solid #000;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 25px;
 }
+.ltt
+{
+    border-bottom: 2px solid #000;
+}
+
 /*-----------------------------------------------------*/
 
 

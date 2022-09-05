@@ -1,0 +1,36 @@
+/*---------- normal state ----------*/
+.main-paage-list
+{
+    background-color: blue;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.classic-mode-area
+{
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    user-select: none;
+    background-color: brown;
+
+}
+
+.classic-mode-difficulties
+{
+    user-select: none;
+    display: none;
+}
+
+
+
+
+
+
+/*---------- conditionals states ----------*/
+.classic-mode-area:hover > .classic-mode-difficulties
+{
+    display: inline-block;
+}

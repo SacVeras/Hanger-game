@@ -3,40 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/style.css">
     <title>Hangman game</title>
 </head>
 <body>
 
-    <main>
-        <!-- title with the game name -->
-        <h1 class="title-game">Hanger game</h1>
+    <main id="root">
 
-        <div class="game-area">
-    
-            <!-- container for letter buttons created in javascript -->
-            <div class="BTNs-CHARs" id="BTNCHAR"></div>
-        
-
-            <!-- here is where it is written what is the category of the word -->
-            <span class="categorie-title">Categorie: <span id="categorie"></span></span>
-        
-
-            <!-- this is where is the word to guess -->
-            <div class="word" id="word"></div>
-        
-
-            <!-- the MSG is the part that tells you how many chances you have and if you won or lost  -->
-            <div class="MSG-container">
-                <span id="MSG"></span> <span id="chances"></span> <span id="MSG-continuation"></span>
-            </div>
-
-            <!-- tha button to restart the game -->
-            <input id="restart" class="restartBTN" type="button" value="play again" onclick="startApp()">
-    
-        </div>
     </main>
-
     
 
     <!-- here is where the version of this app -->

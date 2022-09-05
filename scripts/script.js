@@ -1,13 +1,86 @@
+//-------------------- GLOBAL VARIABLES ------------------------
+const root = document.getElementById("root");
 let chances;
 let word;
+let difficult = 'easy';
 
 
-/*
-this function starts or restarts the game.
-Runs for the first time when the user opens the app
-and when the user clicks the "restart" button at the end of the game
-*/
-function startApp()
+
+
+
+//-------------------- Start app and events
+
+createMainArea()
+
+
+
+
+
+
+//------------------------- FUNCTIONS --------------------
+function createMainArea()
+{
+    root.innerHTML = `
+            <h1 class="main-title">Hangman</h1>
+
+        <ul class="main-paage-list">
+            <li class="classic-mode-area">
+                classic mode
+
+                <ul class="classic-mode-difficulties">
+                    <li onclick="setDifficult('easy')">easy</li>
+                    <li onclick="setDifficult('medium')">medium</li>
+                    <li onclick="setDifficult('hard')">hard</li>
+                </ul>
+            </li>
+
+            <li class="options-btn">options</li>
+        </ul>`;
+}
+
+function setDifficult(value)
+{
+    difficult = value;
+    startGame()
+}
+
+function startGame()
+{
+    chances = 5;
+    createGameArea()
+    defaultElements()
+    updateChancesValue();
+    createsBTNCHARs();
+    chooseCategorie();
+}
+
+function createGameArea()
+{    
+    root.innerHTML = `
+    <h1 class="title-game">Hanger game</h1>
+
+    <div class="game-area">
+
+        <div class="BTNs-CHARs" id="BTNCHAR"></div>
+    
+
+        <span class="categorie-title">Categorie: <span id="categorie"></span></span>
+    
+
+        <div class="word" id="word"></div>
+    
+
+        <div class="MSG-container">
+            <span id="MSG"></span> <span id="chances"></span> <span id="MSG-continuation"></span>
+        </div>
+
+        <input id="restart" class="restartBTN" type="button" value="play again" onclick="startGame()">
+
+    </div>`;
+}
+
+
+function defaultElements()
 {
     document.getElementById("restart").style.display = "none";
     document.getElementById("chances").style.display = "inline";
@@ -15,18 +88,7 @@ function startApp()
     document.getElementById("MSG").innerText = "You have";
     document.getElementById("MSG-continuation").innerText = "chances";
     document.getElementById("word").classList.remove("win");
-    chances = 5;
-    updateChancesValue();
-    createsBTNCHARs();
-    chooseCategorie();
 }
-
-startApp()
-
-
-
-
-
 
 
 
@@ -47,6 +109,7 @@ function createsBTNCHARs()
 
     characters.forEach(char => constructBTNCHAR(char));
 }
+
 function constructBTNCHAR(char)
 {
     let BTN = `<input `;
@@ -60,7 +123,6 @@ function constructBTNCHAR(char)
     addBTNCHAROnContaineer(BTN);
 
 }
-
 
 //puts the buttons in its container element
 function addBTNCHAROnContaineer(BTN)
@@ -86,14 +148,13 @@ function addBTNCHAROnContaineer(BTN)
 //choose the word category
 function chooseCategorie()
 {
-    const indexC = randomIndex(Object.keys(categories).length);
-    const indexD = randomIndex(categories[indexC].listWords.length);
-    const CTGchoosed = categories[indexC].categorie;
-    const WORchoosed = categories[indexC].listWords[indexD].toUpperCase();
-
-    word = trasformWordInArray(WORchoosed);
+    const categories = difficulties[difficult];
+    const categorieIndex = randomIndex(categiriesList.length);
+    const words = categories[categiriesList[categorieIndex]];
+    const wordIndex = randomIndex(words.length);
+    word = trasformWordInArray(words[wordIndex].toUpperCase());
     
-    updateCategoryContainerValue(CTGchoosed);
+    updateCategoryContainerValue(categiriesList[categorieIndex]);
     updateWordContainerValue(word);
 }
 
@@ -130,8 +191,16 @@ function updateWordContainerValue(word)
 
     for(let i = 0; i < word.length; i++)
     {
-        document.getElementById("word").innerHTML += `<span class="ltt" id="ltt_${i}"></span>`;
-    }
+        
+        if(word[i] == " "){
+            document.getElementById("word").innerHTML += `<span class="nlt"> </span>`
+        }
+        else if(word[i] == "-"){
+            document.getElementById("word").innerHTML += `<span class="nlt">-</span>`
+        }
+        else{
+            document.getElementById("word").innerHTML += `<span class="ltt" id="ltt_${i}"></span>`;
+        }    }
 }
 
 //--------------------------------------------------
@@ -202,9 +271,11 @@ function verifyAllComplete()
     
     for(let i = 0; i < listChar.length; i++)
     {
-        if(listChar[i].innerText == "")
+        if(listChar[i].innerText == "" && word[i] !== " ")
         {
+
             answer = false;
+        
         }
     }
         
@@ -236,7 +307,7 @@ function showAnswer()
     
     for(let i = 0; i < listChar.length; i++)
     {
-        if(listChar[i].innerText == "")
+        if(listChar[i].innerText == "" && word[i] !== " ")
         {
             document.getElementById(`ltt_${i}`).innerHTML = `<span class="missingLT">${word[i]}</span>`;
         }
