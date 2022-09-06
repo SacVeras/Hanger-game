@@ -13,10 +13,6 @@ let difficult = 'easy';
 createMainArea()
 
 
-
-
-
-
 //------------------------- FUNCTIONS --------------------
 function createMainArea()
 {
@@ -77,8 +73,29 @@ function createGameArea()
         <input id="restart" class="restartBTN" type="button" value="play again" onclick="startGame()">
 
     </div>`;
-}
 
+    document.onkeydown = event => {
+        const characters =
+        ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
+        "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+
+        const char = event.key.toUpperCase()
+    
+        if (characters.includes(char))
+        {
+            verify(char)
+        }
+
+        if (event.key == 'Enter')
+        {
+            if (document.getElementById("restart").style.display == "inline-block")
+            {
+                document.getElementById("restart").click()
+            }
+        }
+    }
+
+}
 
 function defaultElements()
 {
@@ -152,24 +169,10 @@ function chooseCategorie()
     const categorieIndex = randomIndex(categiriesList.length);
     const words = categories[categiriesList[categorieIndex]];
     const wordIndex = randomIndex(words.length);
-    word = trasformWordInArray(words[wordIndex].toUpperCase());
+    word = words[wordIndex].toUpperCase();
     
     updateCategoryContainerValue(categiriesList[categorieIndex]);
     updateWordContainerValue(word);
-}
-
-//turns the chosen word into an array
-function trasformWordInArray(word)
-{
-
-    let array = [];
-
-    for (let i = 0; i < word.length; i++)
-    {
-        array.push(word[i])
-    }
-
-    return array;
 }
 
 //generates a random index to decide which category and which word will be chosen
