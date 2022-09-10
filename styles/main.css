@@ -1,10 +1,29 @@
 /*---------- normal state ----------*/
+#root
+{
+    width: 100%;
+    height: 100%;
+
+}
+
+.main-title
+{
+    margin: 100px 50px 300px;
+}
+
 .main-paage-list
 {
-    background-color: blue;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    margin-left: 50px;
+}
+
+ul
+{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
 .classic-mode-area
@@ -13,10 +32,11 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    gap: 20px;
     user-select: none;
-    background-color: brown;
 
 }
+
 
 .classic-mode-difficulties
 {
@@ -25,12 +45,46 @@
 }
 
 
+.options-btn
+{
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    user-select: none;
 
+}
 
+.options
+{
+    display: none;
+}
+
+.lenguage-opt
+{
+    height: 50px;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    user-select: none;
+    display: flex;
+}
+
+.lenguages
+{
+    display: none;
+}
 
 
 /*---------- conditionals states ----------*/
-.classic-mode-area:hover > .classic-mode-difficulties
+
+.options-btn:hover > .options
 {
-    display: inline-block;
+    display: flex;
+}
+
+.lenguage-opt:hover > .lenguages 
+{
+    display: block;
 }
