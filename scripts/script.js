@@ -1,31 +1,114 @@
+//-------------------- GLOBAL VARIABLES ------------------------
+const root = document.getElementById("root");
+//as chanches devem ter diferentes qunaatidades para as diferentes dificultadoss
 let chances;
 let word;
+let wordsPlayed = [];
+let lenguage = 'english';
 
 
-/*
-this function starts or restarts the game.
-Runs for the first time when the user opens the app
-and when the user clicks the "restart" button at the end of the game
-*/
-function startApp()
+
+
+
+//-------------------- Start app and events
+
+createMainArea()
+
+
+//------------------------- FUNCTIONS --------------------
+function createMainArea()
 {
-    document.getElementById("restart").style.display = "none";
-    document.getElementById("chances").style.display = "inline";
-    document.getElementById("MSG-continuation").style.display = "inline-block";
-    document.getElementById("MSG").innerText = "You have";
-    document.getElementById("MSG-continuation").innerText = "chances";
-    document.getElementById("word").classList.remove("win");
+    let arrayMainItems = lenguageElements[lenguage]["mainArea"]();
+
+    let elementsMain = `
+        <h1 class="main-title">${arrayMainItems[0]}</h1>
+
+        <ul class="main-paage-list">
+            <li class="classic-mode-area" onclick="startGame()">
+                ${arrayMainItems[1]}
+            </li>
+
+            <li class="options-btn">
+                ${arrayMainItems[5]}
+
+                <ul class="options">
+                    <li class="lenguage-opt">
+                        ${arrayMainItems[6]}
+                        <ul class="lenguages">
+                            <li id="english" onclick="changaLenguage(this.id)">English</li>
+                            <li id="portuguese" onclick="changaLenguage(this.id)">Português</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+    </ul>`;
+
+    
+
+    root.innerHTML = elementsMain;
+
+}
+
+function startGame()
+{
     chances = 5;
+    createGameArea();
+    defaultElements();
     updateChancesValue();
     createsBTNCHARs();
     chooseCategorie();
 }
 
-startApp()
+function createGameArea()
+{    
+    let arrayGameAreaItems = lenguageElements[lenguage]["gameArea"]();
+    root.innerHTML = `
+    <h1 class="title-game">${arrayGameAreaItems[0]}</h1>
 
+    <div class="game-area">
 
+        <div class="BTNs-CHARs" id="BTNCHAR"></div>
+    
 
+        <span class="categorie-title">${arrayGameAreaItems[1]}: <span id="categorie"></span></span>
+    
 
+        <div class="word" id="word"></div>
+    
+
+        <div class="MSG-container">
+            <span id="MSG"></span> <span id="chances"></span> <span id="MSG-continuation"></span>
+        </div>
+
+        <input id="restart" class="restartBTN" type="button" value="${arrayGameAreaItems[2]}" onclick="startGame()">
+
+    </div>`;
+
+    document.onkeydown = event => {
+
+        const characters = 'abcdefghijklmnopqrstuvwxyzç'.toUpperCase().split('');
+        const restartBTN = document.getElementById("restart");
+        const char = event.key.toUpperCase()
+    
+        /*verifica se char é um caractere válido, se for,
+        ele verifica se a palavra possui este caractere*/
+        characters.includes(char)? verify(char) : '';
+
+        //verifica se o botão de restart está visível, se tiver ele o aperta.
+        if (event.key == 'Enter'){ restartBTN.style.display == "inline-block"? restartBTN.click(): ''; }
+    }
+
+}
+
+function defaultElements()
+{
+    document.getElementById("restart").style.display = "none";
+    document.getElementById("chances").style.display = "inline";
+    document.getElementById("MSG-continuation").style.display = "inline-block";
+    document.getElementById("MSG").innerText = lenguageElements[lenguage]["msg"]()[0];
+    document.getElementById("MSG-continuation").innerText = lenguageElements[lenguage]["msg"]()[1];
+    document.getElementById("word").classList.remove("win");
+}
 
 
 
@@ -38,15 +121,19 @@ startApp()
 // creates the letters buttons
 function createsBTNCHARs()
 {
-    const characters =
-    ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
-    "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+    const characters = 'abcdefghijklmnopqrstuvwxyz'.toUpperCase().split('');
+
+    if(lenguage == 'portuguese')
+    {
+        characters.push('Ç')
+    }
 
     //reset the values in btn container
     document.getElementById("BTNCHAR").innerHTML = "";
 
     characters.forEach(char => constructBTNCHAR(char));
 }
+
 function constructBTNCHAR(char)
 {
     let BTN = `<input `;
@@ -60,7 +147,6 @@ function constructBTNCHAR(char)
     addBTNCHAROnContaineer(BTN);
 
 }
-
 
 //puts the buttons in its container element
 function addBTNCHAROnContaineer(BTN)
@@ -86,29 +172,36 @@ function addBTNCHAROnContaineer(BTN)
 //choose the word category
 function chooseCategorie()
 {
-    const indexC = randomIndex(Object.keys(categories).length);
-    const indexD = randomIndex(categories[indexC].listWords.length);
-    const CTGchoosed = categories[indexC].categorie;
-    const WORchoosed = categories[indexC].listWords[indexD].toUpperCase();
 
-    word = trasformWordInArray(WORchoosed);
-    
-    updateCategoryContainerValue(CTGchoosed);
-    updateWordContainerValue(word);
-}
+    let categories;
+    let categorieIndex;
+    let words;
+    let wordIndex;
+    const categoriesOptions = wordsLists[lenguage];
 
-//turns the chosen word into an array
-function trasformWordInArray(word)
-{
 
-    let array = [];
-
-    for (let i = 0; i < word.length; i++)
+    //------------------------------------------------------------------------------
+    do
     {
-        array.push(word[i])
+        categories = categoriesOptions['categoriesWords'];
+        categorieIndex = randomIndex(categoriesOptions['categoriesList'].length);
+        words = categories[categoriesOptions['categoriesList'][categorieIndex]];
+        wordIndex = randomIndex(words.length);
+        word = words[wordIndex].toUpperCase();
+
+    }while(wordsPlayed.includes(word))
+    //--------------------------------------------------------------------------------
+
+
+    if(wordsPlayed.length == 30)
+    {
+        wordsPlayed.shift();
     }
 
-    return array;
+    wordsPlayed.push(word)
+
+    updateCategoryContainerValue(categoriesOptions['categoriesList'][categorieIndex]);
+    updateWordContainerValue(word);
 }
 
 //generates a random index to decide which category and which word will be chosen
@@ -130,8 +223,16 @@ function updateWordContainerValue(word)
 
     for(let i = 0; i < word.length; i++)
     {
-        document.getElementById("word").innerHTML += `<span class="ltt" id="ltt_${i}"></span>`;
-    }
+        
+        if(word[i] == " "){
+            document.getElementById("word").innerHTML += `<span class="nlt"> </span>`
+        }
+        else if(word[i] == "-"){
+            document.getElementById("word").innerHTML += `<span class="nlt">-</span>`
+        }
+        else{
+            document.getElementById("word").innerHTML += `<span class="ltt" id="ltt_${i}"></span>`;
+        }    }
 }
 
 //--------------------------------------------------
@@ -157,7 +258,112 @@ function verify(char)
 
             BTNCHAR.className = "desactived";
     
-            word.includes(char)? findPositionChar(char) : (chances--, updateChancesValue());
+            if (char == 'A')
+            {
+                let haveOne = false;
+                const specialChars = ['A','Â', 'Ã', 'Á', 'À'];
+                specialChars.forEach(schar => 
+                    {
+                        if(word.includes(schar))
+                        {
+                            findPositionChar(schar);
+                            haveOne = true;
+                        }
+                    }
+                )
+                
+                if(haveOne == false)
+                {
+                    chances--;
+                    updateChancesValue();
+                }
+            }
+            else if(char == 'E')
+            {
+                let haveOne = false;
+                const specialChars = ['E','É', 'Ê', 'È'];
+                specialChars.forEach(schar => 
+                    {
+                        if(word.includes(schar))
+                        {
+                            findPositionChar(schar);
+                            haveOne = true;
+                        }
+                    }
+                )
+                
+                if(haveOne == false)
+                {
+                    chances--;
+                    updateChancesValue();
+                }  
+            }
+            else if(char == 'U')
+            {
+                let haveOne = false;
+                const specialChars = ['U','Ú', 'Ù', 'Û'];
+                specialChars.forEach(schar => 
+                    {
+                        if(word.includes(schar))
+                        {
+                            findPositionChar(schar);
+                            haveOne = true;
+                        }
+                    }
+                )
+                
+                if(haveOne == false)
+                {
+                    chances--;
+                    updateChancesValue();
+                }  
+            }
+
+            else if(char == 'O')
+            {
+                let haveOne = false;
+                const specialChars = ['O','Ô', 'Ó', 'Ò', 'Õ'];
+                specialChars.forEach(schar => 
+                    {
+                        if(word.includes(schar))
+                        {
+                            findPositionChar(schar);
+                            haveOne = true;
+                        }
+                    }
+                )
+                
+                if(haveOne == false)
+                {
+                    chances--;
+                    updateChancesValue();
+                }  
+            }
+            else if(char == 'I')
+            {
+                let haveOne = false;
+                const specialChars = ['I','Í', 'Ì', 'Î'];
+                specialChars.forEach(schar => 
+                    {
+                        if(word.includes(schar))
+                        {
+                            findPositionChar(schar);
+                            haveOne = true;
+                        }
+                    }
+                )
+                
+                if(haveOne == false)
+                {
+                    chances--;
+                    updateChancesValue();
+                }  
+            }
+            else
+            {
+                word.includes(char) ? findPositionChar(char) : (chances--, updateChancesValue());
+            }
+
         }
 
     }
@@ -183,11 +389,11 @@ function makeMessage()
     let msg;
     if(chances == 0)
     {
-        msg = "You lose! :("
+        msg = lenguageElements[lenguage]["msg"]()[2];
     }
     else
     {
-        msg = "You Win! :)"
+        msg = lenguageElements[lenguage]["msg"]()[3];
     }
 
     document.getElementById("MSG").innerText = msg;
@@ -202,9 +408,11 @@ function verifyAllComplete()
     
     for(let i = 0; i < listChar.length; i++)
     {
-        if(listChar[i].innerText == "")
+        if(listChar[i].innerText == "" && word[i] !== " ")
         {
+
             answer = false;
+        
         }
     }
         
@@ -236,7 +444,7 @@ function showAnswer()
     
     for(let i = 0; i < listChar.length; i++)
     {
-        if(listChar[i].innerText == "")
+        if(listChar[i].innerText == "" && word[i] !== " ")
         {
             document.getElementById(`ltt_${i}`).innerHTML = `<span class="missingLT">${word[i]}</span>`;
         }
@@ -244,3 +452,9 @@ function showAnswer()
 
 }
 //--------------------------------------------------
+
+function changaLenguage (nl)
+{
+    lenguage = nl;
+    createMainArea();
+}
