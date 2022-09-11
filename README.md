@@ -2,7 +2,7 @@
 
 [tests the game here](https://codepen.io/sacIndex/full/poVoJXx)
 
-
+![](hangman-game.gif)
 ## English
 
 ### description:
