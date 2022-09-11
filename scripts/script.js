@@ -1,6 +1,5 @@
 //-------------------- GLOBAL VARIABLES ------------------------
 const root = document.getElementById("root");
-//as chanches devem ter diferentes qunaatidades para as diferentes dificultadoss
 let chances;
 let word;
 let wordsPlayed = [];
@@ -83,6 +82,8 @@ function createGameArea()
         <input id="restart" class="restartBTN" type="button" value="${arrayGameAreaItems[2]}" onclick="startGame()">
 
     </div>`;
+
+    //----------------------------------------------------------------------------------------------------------------
 
     document.onkeydown = event => {
 
@@ -250,6 +251,15 @@ function updateWordContainerValue(word)
 //checks if the letter chosen by the user is in the word
 function verify(char)
 {
+    const arraysOfSpecialCharacters = 
+    {
+        'A': () => {return ['A','Â', 'Ã', 'Á', 'À']},
+        'E': () => {return ['E','É', 'Ê', 'È']},
+        'I': () => {return ['I','Í', 'Ì', 'Î']},
+        'O': () => {return ['O','Ô', 'Ó', 'Ò', 'Õ']},
+        'U': () => {return ['U','Ú', 'Ù', 'Û']},
+    }
+
     if(chances > 0)
     {
         const BTNCHAR = document.getElementById(char);
@@ -257,107 +267,10 @@ function verify(char)
         if(BTNCHAR.className == "actived"){
 
             BTNCHAR.className = "desactived";
-    
-            if (char == 'A')
-            {
-                let haveOne = false;
-                const specialChars = ['A','Â', 'Ã', 'Á', 'À'];
-                specialChars.forEach(schar => 
-                    {
-                        if(word.includes(schar))
-                        {
-                            findPositionChar(schar);
-                            haveOne = true;
-                        }
-                    }
-                )
-                
-                if(haveOne == false)
-                {
-                    chances--;
-                    updateChancesValue();
-                }
-            }
-            else if(char == 'E')
-            {
-                let haveOne = false;
-                const specialChars = ['E','É', 'Ê', 'È'];
-                specialChars.forEach(schar => 
-                    {
-                        if(word.includes(schar))
-                        {
-                            findPositionChar(schar);
-                            haveOne = true;
-                        }
-                    }
-                )
-                
-                if(haveOne == false)
-                {
-                    chances--;
-                    updateChancesValue();
-                }  
-            }
-            else if(char == 'U')
-            {
-                let haveOne = false;
-                const specialChars = ['U','Ú', 'Ù', 'Û'];
-                specialChars.forEach(schar => 
-                    {
-                        if(word.includes(schar))
-                        {
-                            findPositionChar(schar);
-                            haveOne = true;
-                        }
-                    }
-                )
-                
-                if(haveOne == false)
-                {
-                    chances--;
-                    updateChancesValue();
-                }  
-            }
 
-            else if(char == 'O')
+            if(['A', 'E', 'I', 'O', 'U'].includes(char))
             {
-                let haveOne = false;
-                const specialChars = ['O','Ô', 'Ó', 'Ò', 'Õ'];
-                specialChars.forEach(schar => 
-                    {
-                        if(word.includes(schar))
-                        {
-                            findPositionChar(schar);
-                            haveOne = true;
-                        }
-                    }
-                )
-                
-                if(haveOne == false)
-                {
-                    chances--;
-                    updateChancesValue();
-                }  
-            }
-            else if(char == 'I')
-            {
-                let haveOne = false;
-                const specialChars = ['I','Í', 'Ì', 'Î'];
-                specialChars.forEach(schar => 
-                    {
-                        if(word.includes(schar))
-                        {
-                            findPositionChar(schar);
-                            haveOne = true;
-                        }
-                    }
-                )
-                
-                if(haveOne == false)
-                {
-                    chances--;
-                    updateChancesValue();
-                }  
+                verifySpecialChars(arraysOfSpecialCharacters[char]())
             }
             else
             {
@@ -366,6 +279,27 @@ function verify(char)
 
         }
 
+    }
+
+    function verifySpecialChars(array)
+    {
+        let haveOne = false;
+        const specialChars = array;
+        specialChars.forEach(schar => 
+            {
+                if(word.includes(schar))
+                {
+                    findPositionChar(schar);
+                    haveOne = true;
+                }
+            }
+        )
+        
+        if(haveOne == false)
+        {
+            chances--;
+            updateChancesValue();
+        }
     }
 
     if(chances == 0 || verifyAllComplete())
