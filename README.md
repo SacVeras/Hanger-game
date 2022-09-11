@@ -1,4 +1,4 @@
-# Hanger-game
+# Hangman game
 
 ![](hangman-game.gif)
 
