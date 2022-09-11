@@ -43,7 +43,7 @@ Move the mouse over options, and move it over lenguages and click on the desired
 
 ----------------------------------------------------------------------------------------------------
 
-## portuguese
+## português
 
 ### descrição:
 Este é um antigo jogo onde o jogador deve adivinhar uma palavra com um número limitado de tentativas.
