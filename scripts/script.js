@@ -38,6 +38,16 @@ function createMainArea()
                             <li id="portuguese" onclick="changaLenguage(this.id)">Português</li>
                         </ul>
                     </li>
+
+                    <li class="mode-opt">
+                        mode
+
+                        <ul class="modes">
+                            <li onclick="changeMode('dark')">dark mode</li>
+                            <li onclick="changeMode('white')">whilte mode</li>
+                        </ul>
+
+                    </li>
                 </ul>
             </li>
     </ul>`;
@@ -391,4 +401,16 @@ function changaLenguage (nl)
 {
     lenguage = nl;
     createMainArea();
+}
+
+function changeMode(mode)
+{
+    if (mode == "dark")
+    {
+        document.getElementById("mode").innerHTML = `<link rel="stylesheet" href="./styles/modes/dark-mode.css">`;
+    }
+    else if (mode == "white")
+    {
+        document.getElementById("mode").innerHTML = `<link rel="stylesheet" href="./styles/modes/white-mode.css">`;
+    }
 }

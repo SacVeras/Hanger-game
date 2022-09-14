@@ -22,7 +22,6 @@
     margin-bottom: 100px;
 
     font-size: 30px;
-    color: #5D5D5D;
 }
 /*-----------------------------------------------------*/
 
@@ -46,7 +45,6 @@
 {
     width: 40px;
     height: 40px;
-    background-color: #EBEBEB;
     border: none;
     font-size: 15px;
     font-weight: bold;
@@ -54,17 +52,7 @@
 }
 
 
-.BTNs-CHARs > input[type="button"]:hover
-{
-    background-color: #A2A2A2;
-}
 
-
-/* when char button is desactived */
-.desactived
-{
-    background-color: #747474 !important;
-}
 /*-----------------------------------------------------*/
 
 
@@ -93,10 +81,6 @@
     justify-content: center;
     align-items: center;
     font-size: 25px;
-}
-.ltt
-{
-    border-bottom: 2px solid #000;
 }
 
 /*-----------------------------------------------------*/
@@ -128,27 +112,6 @@
 
 
 
-/*-------- characters that the user did not fill ------*/
-
-.missingLT
-{
-    color: #FF3636;
-}
-/*-----------------------------------------------------*/
-
-
-
-
-/*------- letter/characteres if the user wins ---------*/
-
-.win
-{
-    color: #52C654;
-}
-/*-----------------------------------------------------*/
-
-
-
 
 /*------------------- Restarr button -------------------*/
 
@@ -160,8 +123,6 @@
     margin-top: 40px;
     border-radius: 5px;
 
-    background-color: #171717;
-    color: #fff;
     border: none;
     margin-bottom: 30px;
 }
@@ -189,9 +150,4 @@ footer
     height: 40px;
 }
 
-
-.version-app
-{
-    color: #A2A2A2;
-}
 /*-------------------------------------------------------*/

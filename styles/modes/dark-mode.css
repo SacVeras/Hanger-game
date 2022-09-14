@@ -1,0 +1,58 @@
+body
+{
+    background-color: #171717;
+    color: #fff;
+}
+
+.title-game, .main-title
+{
+    color: #fff;
+}
+
+.BTNs-CHARs > input[type="button"]
+{
+    color: #fff;
+    background-color: #747474;
+}
+
+.BTNs-CHARs > input[type="button"]:hover
+{
+    background-color: #464646;
+    color: #A2A2A2;
+}
+
+
+/* when char button is desactived */
+.desactived
+{
+    background-color: #2E2E2E !important;
+    color: #464646 !important;
+}
+
+.ltt
+{
+    border-bottom: 2px solid #fff;
+}
+
+.missingLT
+{
+    color: #FF3636;
+}
+
+.win
+{
+    color: #00FF66;
+}
+
+.restartBTN
+{
+    background-color: #00FF66;
+    color: #171717;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.version-app
+{
+    color: #A2A2A2;
+}

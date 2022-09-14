@@ -13,6 +13,7 @@
 
 .main-paage-list
 {
+    height: 150px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -59,9 +60,10 @@ ul
 .options
 {
     display: none;
+    flex-direction: column;
 }
 
-.lenguage-opt
+.lenguage-opt, .mode-opt
 {
     height: 50px;
     flex-direction: row;
@@ -71,7 +73,7 @@ ul
     display: flex;
 }
 
-.lenguages
+.lenguages, .modes
 {
     display: none;
 }
@@ -84,7 +86,7 @@ ul
     display: flex;
 }
 
-.lenguage-opt:hover > .lenguages 
+.lenguage-opt:hover > .lenguages , .mode-opt:hover > .modes
 {
     display: block;
 }
