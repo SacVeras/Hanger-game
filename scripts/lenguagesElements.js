@@ -4,12 +4,12 @@ const lenguageElements =
     {
         "mainArea": ()=>
         {
-           return ["Hangman", "classic mode", "easy", "medium", "hard", "options", "lenguages"]
+           return ["Hangman game", "Free mode", "Rush mode", "VS mode", "Options", "Lenguages", "Themes", "Back", "Dark mode", "White mode"]
         },
 
         "gameArea": ()=>
         {
-            return ["Hangman", "Categorie", 'Play again!']
+            return ["Categorie", 'Play again!']
         },
 
         "msg": ()=>
@@ -22,12 +22,12 @@ const lenguageElements =
     {
         "mainArea":()=>
         {
-            return ["Forca", "modo clássico", "fácil", "médio", "difícil", "opções", "idiomas"]
+            return ["Hangman game", "Modo livre", "Modo Rush", "Modo VS", "Opções", "Idiomas", "Temas", "Voltar", "Modo escuro", "Modo claro"]
         },
 
         "gameArea": ()=>
         {
-            return ["Forca", "Categoria", 'Jogar novamente!']
+            return ["Categoria", 'Jogar novamente!']
         },
 
         "msg": ()=>

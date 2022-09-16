@@ -1,18 +1,28 @@
-*
+@import url('https://fonts.googleapis.com/css2?family=Oldenburg&display=swap');
+
+:root
 {
-    box-sizing: border-box;
-    font-family: sans-serif;
+    --color1: #1F2933;
+    --color2: #616E7C;
+    --color3: #CBD2D9;
+    --color4: #52606D;
+    --color6: #3E4C59;
+    --color7: #9AA5B1;
+    --color8: #323F4B;
+    --hover : #FFBF00;
 }
 
-body
+*
 {
-    width: 100vw;
-    height: 100vh;
-
     margin: 0;
     padding: 0;
+    color: var(--color3);
+    box-sizing: border-box;
+    font-family: sans-serif;
+    user-select: none;
+}
 
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
+#root
+{   
+    background-color: var(--color1);
 }

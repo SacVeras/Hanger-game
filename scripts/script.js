@@ -18,44 +18,7 @@ createMainArea()
 function createMainArea()
 {
     let arrayMainItems = lenguageElements[lenguage]["mainArea"]();
-
-    let elementsMain = `
-        <h1 class="main-title">${arrayMainItems[0]}</h1>
-
-        <ul class="main-paage-list">
-            <li class="classic-mode-area" onclick="startGame()">
-                ${arrayMainItems[1]}
-            </li>
-
-            <li class="options-btn">
-                ${arrayMainItems[5]}
-
-                <ul class="options">
-                    <li class="lenguage-opt">
-                        ${arrayMainItems[6]}
-                        <ul class="lenguages">
-                            <li id="english" onclick="changaLenguage(this.id)">English</li>
-                            <li id="portuguese" onclick="changaLenguage(this.id)">Português</li>
-                        </ul>
-                    </li>
-
-                    <li class="mode-opt">
-                        mode
-
-                        <ul class="modes">
-                            <li onclick="changeMode('dark')">dark mode</li>
-                            <li onclick="changeMode('white')">whilte mode</li>
-                        </ul>
-
-                    </li>
-                </ul>
-            </li>
-    </ul>`;
-
-    
-
-    root.innerHTML = elementsMain;
-
+    root.innerHTML = structures["mainAreaStructure"](arrayMainItems);
 }
 
 function startGame()
@@ -71,27 +34,7 @@ function startGame()
 function createGameArea()
 {    
     let arrayGameAreaItems = lenguageElements[lenguage]["gameArea"]();
-    root.innerHTML = `
-    <h1 class="title-game">${arrayGameAreaItems[0]}</h1>
-
-    <div class="game-area">
-
-        <div class="BTNs-CHARs" id="BTNCHAR"></div>
-    
-
-        <span class="categorie-title">${arrayGameAreaItems[1]}: <span id="categorie"></span></span>
-    
-
-        <div class="word" id="word"></div>
-    
-
-        <div class="MSG-container">
-            <span id="MSG"></span> <span id="chances"></span> <span id="MSG-continuation"></span>
-        </div>
-
-        <input id="restart" class="restartBTN" type="button" value="${arrayGameAreaItems[2]}" onclick="startGame()">
-
-    </div>`;
+    root.innerHTML = structures["gameAreaStructure"](arrayGameAreaItems);
 
     //----------------------------------------------------------------------------------------------------------------
 
@@ -118,7 +61,7 @@ function defaultElements()
     document.getElementById("MSG-continuation").style.display = "inline-block";
     document.getElementById("MSG").innerText = lenguageElements[lenguage]["msg"]()[0];
     document.getElementById("MSG-continuation").innerText = lenguageElements[lenguage]["msg"]()[1];
-    document.getElementById("word").classList.remove("win");
+    document.getElementById("word").classList.remove("LTSWhenWin");
 }
 
 
@@ -128,18 +71,10 @@ function defaultElements()
 
 //--------------------------------------------------
 
-// BTNCHAR is "button character"
-// creates the letters buttons
 function createsBTNCHARs()
 {
     const characters = 'abcdefghijklmnopqrstuvwxyz'.toUpperCase().split('');
 
-    if(lenguage == 'portuguese')
-    {
-        characters.push('Ç')
-    }
-
-    //reset the values in btn container
     document.getElementById("BTNCHAR").innerHTML = "";
 
     characters.forEach(char => constructBTNCHAR(char));
@@ -147,30 +82,11 @@ function createsBTNCHARs()
 
 function constructBTNCHAR(char)
 {
-    let BTN = `<input `;
-    BTN += `type="button"`;
-    BTN += `class="actived"`;
-    BTN += `value="${char}"`;
-    BTN += `id="${char}"`;
-    BTN += `onclick="verify(id)"`
-    BTN += `>`
-
-    addBTNCHAROnContaineer(BTN);
-
-}
-
-//puts the buttons in its container element
-function addBTNCHAROnContaineer(BTN)
-{
-    const BTNCHAR = document.getElementById("BTNCHAR");
-
-    BTNCHAR.innerHTML += BTN;
+    let BTN = `<li class="actived" id="${char}" onclick="verify(this.id)"> ${char} </li>`;
+    document.getElementById("BTNCHAR").innerHTML += BTN;
 }
 
 //--------------------------------------------------
-
-
-
 
 
 
@@ -183,13 +99,11 @@ function addBTNCHAROnContaineer(BTN)
 //choose the word category
 function chooseCategorie()
 {
-
     let categories;
     let categorieIndex;
     let words;
     let wordIndex;
     const categoriesOptions = wordsLists[lenguage];
-
 
     //------------------------------------------------------------------------------
     do
@@ -203,7 +117,6 @@ function chooseCategorie()
     }while(wordsPlayed.includes(word))
     //--------------------------------------------------------------------------------
 
-
     if(wordsPlayed.length == 30)
     {
         wordsPlayed.shift();
@@ -214,6 +127,13 @@ function chooseCategorie()
     updateCategoryContainerValue(categoriesOptions['categoriesList'][categorieIndex]);
     updateWordContainerValue(word);
 }
+
+
+
+
+
+
+
 
 //generates a random index to decide which category and which word will be chosen
 function randomIndex(max)
@@ -227,6 +147,13 @@ function updateCategoryContainerValue(categorie)
     document.getElementById("categorie").innerText = categorie;
 }
 
+
+
+
+
+
+
+
 //add white spaces with the chosen word size in the container
 function updateWordContainerValue(word)
 {
@@ -236,20 +163,17 @@ function updateWordContainerValue(word)
     {
         
         if(word[i] == " "){
-            document.getElementById("word").innerHTML += `<span class="nlt"> </span>`
+            document.getElementById("word").innerHTML += `<li class="llt"> </li>`
         }
         else if(word[i] == "-"){
-            document.getElementById("word").innerHTML += `<span class="nlt">-</span>`
+            document.getElementById("word").innerHTML += `<li class="llt">-</li>`
         }
         else{
-            document.getElementById("word").innerHTML += `<span class="ltt" id="ltt_${i}"></span>`;
+            document.getElementById("word").innerHTML += `<li class="llt hlt" id="ltt_${i}"></li>`;
         }    }
 }
 
 //--------------------------------------------------
-
-
-
 
 
 
@@ -291,6 +215,13 @@ function verify(char)
 
     }
 
+
+
+
+
+
+
+
     function verifySpecialChars(array)
     {
         let haveOne = false;
@@ -316,7 +247,14 @@ function verify(char)
     {
         if(chances != 0)
         {
-            document.getElementById("word").classList.add("win");
+            let letters = document.querySelectorAll(".llt");
+            for(let i = 0; i < letters.length; i++)
+            {
+                if(letters != "")
+                {
+                    letters[i].classList.add("LTSWhenWin");
+                }
+            }
         }
         makeMessage();
         document.getElementById("restart").style.display = "inline-block";
@@ -326,6 +264,13 @@ function verify(char)
     }
 
 }
+
+
+
+
+
+
+
 
 //does and send the message "you win" or "you lost" to the container element
 function makeMessage()
@@ -342,6 +287,16 @@ function makeMessage()
 
     document.getElementById("MSG").innerText = msg;
 }
+
+
+
+
+
+
+
+
+
+
 
 //checks if all the letters in the blanks are filled
 function verifyAllComplete()
@@ -363,6 +318,11 @@ function verifyAllComplete()
     return answer;
 }
 
+
+
+
+
+
 //search where the user-selected letter is in the word, if it has
 function findPositionChar(char)
 {
@@ -375,11 +335,22 @@ function findPositionChar(char)
     }
 }
 
+
+
+
+
+
 //coloca o novo valor de chances no contêiner
 function updateChancesValue()
 {
     document.getElementById("chances").innerText = chances;
 }
+
+
+
+
+
+
 
 //shows the answer if the user's chances are 0
 function showAnswer()
@@ -390,27 +361,24 @@ function showAnswer()
     {
         if(listChar[i].innerText == "" && word[i] !== " ")
         {
-            document.getElementById(`ltt_${i}`).innerHTML = `<span class="missingLT">${word[i]}</span>`;
+            document.getElementById(`ltt_${i}`).innerHTML = `<span class="missingLTS">${word[i]}</span>`;
         }
     }
 
 }
 //--------------------------------------------------
 
-function changaLenguage (nl)
+function changeLenguage (nl)
 {
     lenguage = nl;
     createMainArea();
 }
 
-function changeMode(mode)
+
+
+
+function showsList(listToHide, ListToShow)
 {
-    if (mode == "dark")
-    {
-        document.getElementById("mode").innerHTML = `<link rel="stylesheet" href="./styles/modes/dark-mode.css">`;
-    }
-    else if (mode == "white")
-    {
-        document.getElementById("mode").innerHTML = `<link rel="stylesheet" href="./styles/modes/white-mode.css">`;
-    }
+    document.getElementById(listToHide).style.display = "none";
+    document.getElementById(ListToShow).style.display = "block";
 }
