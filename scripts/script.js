@@ -3,7 +3,7 @@ const root = document.getElementById("root");
 let chances;
 let word;
 let wordsPlayed = [];
-let lenguage = 'english';
+let lenguage = 'portuguese';
 const characters = 'abcdefghijklmnopqrstuvwxyzç'.toUpperCase().split('');
 
 

@@ -1,6 +1,5 @@
 const structures = 
 {
-    
     "mainAreaStructure": (arrayMainItems)=>
     {
         return `
@@ -11,8 +10,6 @@ const structures =
         
             <div id="principal">
                 <li onclick="startGame()">${arrayMainItems[1]}</li>
-                <li onclick="startGame()">${arrayMainItems[2]}</li>
-                <li onclick="startGame()">${arrayMainItems[3]}</li>
                 <li onclick="showsList('principal', 'options')">${arrayMainItems[4]}</li>
             </div>
         
@@ -29,8 +26,8 @@ const structures =
             </div>
         
             <div id="themes">
-                <li>${arrayMainItems[8]}</li>
-                <li>${arrayMainItems[9]}</li>
+                <li onclick="chnageTheme('dark')">${arrayMainItems[8]}</li>
+                <li onclick="chnageTheme('white')">${arrayMainItems[9]}</li>
                 <li onclick="showsList('themes', 'options')">${arrayMainItems[7]}</li>
             </div>
             </ul>

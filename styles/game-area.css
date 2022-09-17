@@ -35,18 +35,20 @@
     align-items: center;
     justify-content: center;
 
-    background-color: var(--color4);
+    font-weight: bold;
+
+    background-color: var(--BTNColor);
     list-style-type: none;
 }
 
 .BTNs-CHARs > li:hover
 {
-    background-color: var(--color8);
+    background-color: var(--BTNCHARHover);
 }
 
 .BTNs-CHARs > .desactived
 {
-    background-color: var(--color8);
+    background-color: var(--BTNCHARHover);
 }
 
 .categorie-title
@@ -80,7 +82,7 @@
 
 .hlt
 {
-    border-bottom: 1px solid var(--color3);
+    border-bottom: 1px solid var(--textColor);
 }
 
 .MSG-container
@@ -102,15 +104,16 @@
     height: 100%;
     border: none;
     outline: none;
-    background-color: var(--color4);
+    background-color: var(--BTNRBC);
+    color: var(--BTNRTXT);
     font-weight: bold;
     font-size: 15px;
 }
 
 .reset-container > .restartBTN:hover
 {
-    background-color: var(--color6);
-    color: var(--color7);
+    background-color: var(--BTNRBCHover);
+    color: var(--TXTBTNRBCHover);
 }
 
 /*-------------------------------------*/

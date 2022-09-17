@@ -1,22 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Oldenburg&display=swap');
 
-:root
-{
-    --color1: #1F2933;
-    --color2: #616E7C;
-    --color3: #CBD2D9;
-    --color4: #52606D;
-    --color6: #3E4C59;
-    --color7: #9AA5B1;
-    --color8: #323F4B;
-    --hover : #FFBF00;
-}
 
 *
 {
     margin: 0;
     padding: 0;
-    color: var(--color3);
+    color: var(--textColor);
     box-sizing: border-box;
     font-family: sans-serif;
     user-select: none;
@@ -24,5 +13,5 @@
 
 #root
 {   
-    background-color: var(--color1);
+    background-color: var(--backgroundColor);
 }

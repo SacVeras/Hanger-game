@@ -145,13 +145,13 @@ function updateWordContainerValue(word)
     {
         let elementLI = "";
 
-        if (characters.includes(word[i]))
+        if (word[i] == " " || word[i] == "-")
         {
-            elementLI = `<li class="llt hlt" id="ltt_${i}"></li>`;
+            elementLI = `<li class="llt">${word[i]}</li>`;
         }
         else
         {
-            elementLI = `<li class="llt">${word[i]}</li>`;
+            elementLI = `<li class="llt hlt" id="ltt_${i}"></li>`;
         }
 
 
@@ -347,7 +347,7 @@ function showAnswer()
 function changeLenguage (nl)
 {
     lenguage = nl;
-    createMainArea();
+    createArea("mainArea");
 }
 
 
@@ -356,6 +356,14 @@ function showsList(listToHide, ListToShow)
 {
     document.getElementById(listToHide).style.display = "none";
     document.getElementById(ListToShow).style.display = "block";
+}
+
+
+
+function chnageTheme(theme)
+{
+    const link = `./styles/themes/${theme}_mode.css`;
+    document.getElementById("theme").href = link;
 }
 //---------------------------------------------------------------------------------
 
