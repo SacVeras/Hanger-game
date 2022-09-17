@@ -1,18 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Oldenburg&display=swap');
+
+
 *
 {
-    box-sizing: border-box;
-    font-family: sans-serif;
-}
-
-body
-{
-    width: 100vw;
-    height: 100vh;
-
     margin: 0;
     padding: 0;
+    color: var(--textColor);
+    box-sizing: border-box;
+    font-family: sans-serif;
+    user-select: none;
+}
 
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
+#root
+{   
+    background-color: var(--backgroundColor);
 }
