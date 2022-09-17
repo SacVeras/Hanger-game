@@ -17,6 +17,7 @@ This is an old game where the player must guess a word with a limited number of 
 
 ### new version(v2.6)
 * It has a new design
+* A responsive design
 * Improved code
 * Dark and White modes available (not available in codepen version for now)
 
@@ -57,6 +58,7 @@ Este é um antigo jogo onde o jogador deve adivinhar uma palavra com um número 
 
 ### nova versão(v2.6)
 * Está com um novo design
+* Um design responsivo
 * Código melhorado
 * Dark e White modes disponível (não disponível na versão do codepen por enquanto)
 
