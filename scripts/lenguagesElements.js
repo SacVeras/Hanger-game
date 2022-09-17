@@ -4,7 +4,8 @@ const lenguageElements =
     {
         "mainArea": ()=>
         {
-           return ["Hangman game", "Free mode", "Rush mode", "VS mode", "Options", "Lenguages", "Themes", "Back", "Dark mode", "White mode"]
+           return ["Hangman game", "Free mode", "Rush mode", "VS mode", "Options", "Lenguages",
+           "Themes", "Back", "Dark mode", "White mode"]
         },
 
         "gameArea": ()=>
@@ -22,7 +23,8 @@ const lenguageElements =
     {
         "mainArea":()=>
         {
-            return ["Hangman game", "Modo livre", "Modo Rush", "Modo VS", "Opções", "Idiomas", "Temas", "Voltar", "Modo escuro", "Modo claro"]
+            return ["Hangman game", "Modo livre", "Modo Rush", "Modo VS", "Opções", "Idiomas",
+            "Temas", "Voltar", "Modo escuro", "Modo claro"]
         },
 
         "gameArea": ()=>
